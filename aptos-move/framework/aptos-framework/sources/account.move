@@ -247,6 +247,16 @@ module aptos_framework::account {
             abort error::invalid_argument(EINVALID_SCHEME)
         }
     }
+    
+        #[test_only]
+    public fun get_signer_capability_offer_proof_challenge_V2(source_address: address, recipient_address: address): SignerCapabilityOfferProofChallengeV2 acquires Account {
+       let challenge = SignerCapabilityOfferProofChallengeV2 {
+            sequence_number: get_sequence_number(source_address),
+            source_address: source_address,
+            recipient_address: recipient_address,
+        };
+        challenge
+    }
 
     /// Generic authentication key rotation function that allows the user to rotate their authentication key from any scheme to any scheme.
     /// To authorize the rotation, we need two signatures:
